@@ -7,10 +7,10 @@ password = quote_plus("Uc~FXtxYWP")
 CSV_FILE = "merged_deduplicated.csv"
 
 DB_CONFIG = {
-    "dbname": "Cosmetics",
+    "dbname": "cosmetics",
     "user": "postgres",
     "password": password,
-    "host": "localhost",
+    "host": "db",
     "port": 5432
 }
 

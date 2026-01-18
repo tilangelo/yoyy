@@ -8,7 +8,7 @@ from urllib.parse import quote_plus
 password = quote_plus("Uc~FXtxYWP")
 DATABASE_URL = os.getenv(
     "DATABASE_URL",
-    f"postgresql+psycopg2://postgres:{password}@db:5432/Cosmetics"
+    f"postgresql+psycopg2://postgres:{password}@db:5432/cosmetics"
 )
 
 engine = create_engine(DATABASE_URL, pool_pre_ping=True)
@@ -39,7 +39,6 @@ def search(
     elif sort == "rating_desc":
         order_by = "max_rating DESC"
 
-    # ---------- УСЛОВИЯ ----------
     conditions = []
     params = {"q": f"%{q}%"}
 
@@ -63,7 +62,6 @@ def search(
         having.append("MAX(o.price) <= :price_to")
         params["price_to"] = price_to
 
-    # ---------- SQL ----------
     query = f"""
         SELECT
             p.id,
@@ -83,7 +81,6 @@ def search(
 
     query += f" ORDER BY {order_by}"
 
-    # ---------- ВЫПОЛНЕНИЕ ----------
     with engine.connect() as conn:
         products = conn.execute(text(query), params).fetchall()
 
