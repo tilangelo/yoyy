@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>{{ product.canonical_name }}</title>
+    <link rel="stylesheet"
+          href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">
+</head>
+<body class="container mt-4">
+
+<a href="/" class="btn btn-secondary mb-3">← Назад</a>
+
+<h1>{{ product.canonical_name }}</h1>
+
+{% if product.image_url %}
+<img src="{{ product.image_url }}" style="max-width:300px">
+{% endif %}
+
+<p>{{ product.description }}</p>
+
+<h3>Характеристики</h3>
+<ul>
+{% for a in attributes %}
+    <li><b>{{ a.attribute_name }}:</b> {{ a.attribute_value }}</li>
+{% endfor %}
+</ul>
+
+<h3>Предложения</h3>
+<table class="table">
+    <tr>
+        <th>Магазин</th>
+        <th>Цена</th>
+        <th>Ссылка</th>
+    </tr>
+{% for o in offers %}
+    <tr>
+        <td>{{ o.website_name }}</td>
+        <td>{{ o.price }} ₽</td>
+        <td><a href="{{ o.url }}" target="_blank">Перейти</a></td>
+    </tr>
+{% endfor %}
+</table>
+
+</body>
+</html>
